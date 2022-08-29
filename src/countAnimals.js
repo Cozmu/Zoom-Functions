@@ -4,7 +4,8 @@ const data = require('../data/zoo_data');
 function countAnimals(animal) {
   if (!animal) {
     return species.reduce((acumulador, { name, residents }) => {
-      acumulador[name] = residents.length;
+      const x = acumulador;
+      x[name] = residents.length;
       return acumulador;
     }, {});
   }
