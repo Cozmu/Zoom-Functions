@@ -29,17 +29,17 @@ const cronograma = {
       .map(({ name }) => name),
   },
   Friday: {
-    officeHour: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close}pm`,
+    officeHour: `Open from ${hours.Friday.open}am until ${hours.Friday.close}pm`,
     exhibition: species.filter(({ availability }) => availability.includes('Friday'))
       .map(({ name }) => name),
   },
   Saturday: {
-    officeHour: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close}pm`,
+    officeHour: `Open from ${hours.Saturday.open}am until ${hours.Saturday.close}pm`,
     exhibition: species.filter(({ availability }) => availability.includes('Saturday'))
       .map(({ name }) => name),
   },
   Sunday: {
-    officeHour: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close}pm`,
+    officeHour: `Open from ${hours.Sunday.open}am until ${hours.Sunday.close}pm`,
     exhibition: species.filter(({ availability }) => availability.includes('Sunday'))
       .map(({ name }) => name),
   },
@@ -55,9 +55,9 @@ function getSchedule(scheduleTarget) {
     return species.find(({ name }) => name === scheduleTarget).availability;
   }
   if (cronograma[scheduleTarget]) {
-    return cronograma[scheduleTarget]; // falta isso
+    return { [scheduleTarget]: cronograma[scheduleTarget] };
   }
   return cronograma;
 }
-console.log(getSchedule());
+console.log(getSchedule('Sunday'));
 module.exports = getSchedule;
