@@ -59,5 +59,4 @@ function getSchedule(scheduleTarget) {
   }
   return cronograma;
 }
-console.log(getSchedule('Sunday'));
 module.exports = getSchedule;
