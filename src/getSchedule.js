@@ -11,6 +11,7 @@ const data = require('../data/zoo_data');
 //   return acc;
 // }, {});
 // console.log(x);
+// console.log(nome);
 
 const cronograma = {
   Tuesday: {
