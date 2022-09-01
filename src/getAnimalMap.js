@@ -50,24 +50,7 @@ function getTheAnimalsNameSortedPlaceBySex(param) {
   }, {});
 }
 
-function getAnimalMap({ includeNames, sorted, sex } = {}) {
-  if (includeNames && sorted && sex) {
-    return getTheAnimalsNameSortedPlaceBySex(sex);
-  }
-  if (includeNames && sorted) {
-    return getTheAnimalsNameSortedPlace();
-  }
-  if (includeNames && sex) {
-    return getLocalAnimalsNameBySex(sex);
-  }
-  if (includeNames) {
-    return getAnimalsLocalName();
-  }
-  return getAnimalsLocal();
-}
-console.log(getAnimalMap({ includeNames: true, sex: 'female', sorted: true }));
-module.exports = getAnimalMap;
-/* function ifUm(a, b, c) {
+function ifUm(a, b, c) {
   const x = c;
   console.log(c);
   if (a && b && c) {
@@ -80,7 +63,22 @@ function ifDois(x, y) {
   if (x && y) {
     return getTheAnimalsNameSortedPlace();
   }
-} */
+}
+
+function getAnimalMap({ includeNames, sorted, sex } = {}) {
+  const x = sex;
+  ifUm(includeNames, sorted, sex);
+  ifDois(includeNames, sorted);
+  if (includeNames && sex) {
+    return getLocalAnimalsNameBySex(x);
+  }
+  if (includeNames) {
+    return getAnimalsLocalName();
+  }
+  return getAnimalsLocal();
+}
+console.log(getAnimalMap({ includeNames: true, sex: 'female', sorted: true }));
+module.exports = getAnimalMap;
 /*
 ifUm(includeNames, sorted, sex);
 ifDois(includeNames, sorted);
