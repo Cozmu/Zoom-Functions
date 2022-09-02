@@ -28,29 +28,29 @@ function getTheAnimalsNameSortedPlace() {
   }, {});
 }
 
-function getLocalAnimalsNameBySex(param) {
+function getLocalAnimalsNameBySex() {
   return species.reduce((acc, curr) => {
     acc[curr.location] = acc[curr.location] || [];
     acc[curr.location].push({
       [curr.name]: curr.residents
-        .filter(({ sex }) => sex === param).map(({ name }) => name),
+        .filter(({ sex }) => sex === 'female').map(({ name }) => name),
     });
     return acc;
   }, {});
 }
 
-function getTheAnimalsNameSortedPlaceBySex(param) {
+function getTheAnimalsNameSortedPlaceBySex() {
   return species.reduce((acc, curr) => {
     acc[curr.location] = acc[curr.location] || [];
     acc[curr.location].push({
       [curr.name]: curr.residents
-        .filter(({ sex }) => sex === param).map(({ name }) => name).sort(),
+        .filter(({ sex }) => sex === 'female').map(({ name }) => name).sort(),
     });
     return acc;
   }, {});
 }
+
 function refatorandoUm(includeNames, sorted, sex) {
-  console.log(includeNames, sorted, sex);
   if (includeNames && sorted) {
     return getTheAnimalsNameSortedPlace();
   }
@@ -60,23 +60,25 @@ function refatorandoUm(includeNames, sorted, sex) {
   }
 }
 
-function refatorandoDois(sorted, sex) {
-  if (sorted && sex) {
-    return getTheAnimalsNameSortedPlaceBySex(sex);
+function refatorandoDois(includeNames, sorted) {
+  if (sorted && includeNames) {
+    return getTheAnimalsNameSortedPlaceBySex();
   }
-  if (sex) {
-    return getLocalAnimalsNameBySex(sex);
+  if (includeNames) {
+    return getLocalAnimalsNameBySex();
   }
 }
 
 function getAnimalMap({ includeNames, sorted, sex } = {}) {
+  if (!includeNames) {
+    return getAnimalsLocal();
+  }
+  if (sex) {
+    return refatorandoDois(includeNames, sorted);
+  }
   if (includeNames) {
     return refatorandoUm(includeNames, sorted, sex);
   }
-  if (sex) {
-    return refatorandoDois(sorted, sex);
-  }
-  return getAnimalsLocal();
 }
 console.log(getAnimalMap({ includeNames: true, sex: 'female', sorted: true }));
 module.exports = getAnimalMap;
